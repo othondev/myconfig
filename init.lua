@@ -2,15 +2,23 @@ local Config = {}
 
 Config.mappings = {
   n = {
-    ['<leader>ss'] = { cmd = ':Telescope live_grep<cr>', desc = 'Search with live grep' },
-    ['<C-f>'] = { cmd = ':Telescope git_files<cr>', desc = 'Search git files' },
-    ['\\'] = { cmd = ':Telescope git_files<cr>', desc = 'Search git files' },
-    ['<leader>su'] = { cmd = ':lua git_stashes()<cr>', desc = '[S]earch uncommitted' },
+    ['<TAB>'] = { cmd = ':Telescope buffers' },
+    ['<C-h>'] = { cmd = '<C-w>h' },
+    ['<C-j>'] = { cmd = '<C-w>j' },
+    ['<C-k>'] = { cmd = '<C-w>k' },
+    ['<C-l>'] = { cmd = '<C-w>l' },
+    ['<leader>ss'] = { cmd = ':Telescope live_grep', desc = 'Search with live grep' },
+    ['<C-f>'] = { cmd = ':Telescope grep_string', desc = 'Search git files' },
+    ['<C-p>'] = { cmd = ':Telescope git_files', desc = 'Search git files' },
+    ['\\'] = { cmd = ':Telescope git_files', desc = 'Search git files' },
+  },
+  v = {
+    ['<C-f>'] = { cmd = ':Telescope grep_string', desc = '[S]earch selected text' },
   },
 }
 
 for mode, mode_mappings in pairs(Config.mappings) do
   for key, mapping in pairs(mode_mappings) do
-    vim.api.nvim_set_keymap(mode, key, mapping.cmd, { noremap = true, silent = true, desc = mapping.desc })
+    vim.api.nvim_set_keymap(mode, key, mapping.cmd .. '<cr>', { noremap = true, silent = true, desc = mapping.desc })
   end
 end
